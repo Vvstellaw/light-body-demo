@@ -1,6 +1,8 @@
-const CACHE_NAME = "light-body-v3";
+const CACHE_NAME = "light-body-v4";
 const APP_SHELL = [
   "/fit-demo.html",
+  "/app-v4.css",
+  "/app-v4.js",
   "/manifest.webmanifest",
   "/assets/app-icon.svg",
   "/assets/app-icon-180.png",

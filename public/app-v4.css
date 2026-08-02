@@ -1,0 +1,18 @@
+.formrow select{border:0;background:transparent;text-align:right;max-width:58%;outline:none;color:var(--text)}
+.key-remember{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;margin:12px 0;padding:13px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.key-remember input{margin-top:2px;accent-color:var(--accent)}
+.key-remember span{display:flex;flex-direction:column;gap:4px}.key-remember strong{font-size:11px}.key-remember small{font-size:8px;line-height:1.45;color:var(--muted)}
+.key-warning{padding:10px 12px;border-radius:13px;background:var(--soft);font-size:8px;line-height:1.55;color:var(--muted);margin:10px 0 14px}
+.api-key-link{display:block;text-align:center;margin-top:14px;color:var(--accent2);font-size:9px;text-decoration:none}
+.danger-text{color:#b45e63!important}.key-inline{display:block;margin:13px auto 0;background:none;color:var(--accent2);font-size:9px;text-decoration:underline;text-underline-offset:3px}
+.ai-model-card{width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;text-align:left;padding:13px 15px;margin:12px 0;border-radius:18px;border:1px solid var(--line);background:var(--card)}
+.ai-model-card span{display:flex;flex-direction:column;gap:4px}.ai-model-card strong{font-size:11px}.ai-model-card small{font-size:8px;color:var(--muted)}.ai-model-card b{color:var(--muted)}
+.ai-model-card.ready{border-color:color-mix(in srgb,var(--good) 42%,var(--line));background:color-mix(in srgb,var(--good) 8%,var(--card))}
+.recognized-block{margin:12px 0}.recognized-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.recognized-grid div{display:flex;flex-direction:column;gap:4px;padding:10px;border-radius:13px;background:var(--soft)}.recognized-grid span{font-size:8px;color:var(--muted)}.recognized-grid strong{font-size:11px}
+.recognition-warning{font-size:8px!important;color:#a56b52!important;background:#a56b5210;padding:9px;border-radius:11px}
+.detail-metrics{max-height:270px;overflow:auto}.detail-metric{min-width:0}.detail-metric strong{overflow-wrap:anywhere}
+.ai-error{padding:22px 5px}.ai-error i{background:#b45e6318;color:#b45e63}
+.scan .scanbox{margin-bottom:20px}.scan .scanline{animation:scanMove 1.6s ease-in-out infinite}@keyframes scanMove{0%,100%{top:16%}50%{top:80%}}
+.week-strip{overflow-x:auto;scrollbar-width:none}.week-strip::-webkit-scrollbar{display:none}.week-day{min-width:39px}
+@media(max-width:520px){.recognized-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -27,15 +27,16 @@ test("ships an installable iPhone-safe app shell", async () => {
   assert.equal(appManifest.scope, "/");
   assert.equal(appManifest.start_url, "/fit-demo.html");
   assert.ok(appManifest.icons.some((icon) => icon.sizes === "512x512"));
-  assert.match(serviceWorker, /light-body-v3/);
+  assert.match(serviceWorker, /light-body-v4/);
   assert.match(serviceWorker, /event\.request\.mode === ["']navigate["']/);
   assert.match(serviceWorker, /if \(response\.ok\)/);
   assert.match(serviceWorker, /pathname\.startsWith\(["']\/api\/["']\)/);
 });
 
-test("keeps real records and private media storage wired", async () => {
-  const [html, worker, hosting] = await Promise.all([
+test("keeps real records, AI analysis, and private media storage wired", async () => {
+  const [html, aiClient, worker, hosting] = await Promise.all([
     read("fit-demo.html"),
+    read("app-v4.js"),
     read("worker/index.ts"),
     read(".openai/hosting.json"),
   ]);
@@ -43,11 +44,17 @@ test("keeps real records and private media storage wired", async () => {
   assert.match(html, /function saveRecord/);
   assert.match(html, /function renderTrend/);
   assert.match(html, /function renderCompare/);
-  assert.match(html, /辅助录入测试版/);
-  assert.match(html, /当前测试版还不会自动读取照片特征/);
+  assert.match(html, /app-v4\.js/);
   assert.match(html, /if\(!recordResponse\.ok\)throw new Error/);
+  assert.match(aiClient, /\/api\/ai\/scale/);
+  assert.match(aiClient, /\/api\/ai\/body-analysis/);
+  assert.match(aiClient, /x-openai-key/);
+  assert.match(aiClient, /openDayDetail\(date\):openEmptyDay\(date\)/);
 
   assert.match(worker, /\/api\/records/);
+  assert.match(worker, /\/api\/ai\/scale/);
+  assert.match(worker, /\/api\/ai\/body-analysis/);
+  assert.match(worker, /ai_coach_profiles/);
   assert.match(worker, /url\.pathname === "\/"/);
   assert.match(worker, /\/fit-demo\.html/);
   assert.match(worker, /env\.DB/);
