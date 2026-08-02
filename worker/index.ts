@@ -168,6 +168,18 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    if (request.method === "GET" && (url.pathname === "/" || url.pathname === "/fit-demo")) {
+      return Response.redirect(new URL("/fit-demo.html", url), 302);
+    }
+
+    if (request.method === "GET" && url.pathname === "/favicon.ico") {
+      return Response.redirect(new URL("/favicon.svg", url), 302);
+    }
+
+    if (request.method === "GET" && (url.pathname === "/apple-touch-icon.png" || url.pathname === "/apple-touch-icon-precomposed.png")) {
+      return Response.redirect(new URL("/assets/app-icon-180.png", url), 302);
+    }
+
     if (url.pathname.startsWith("/api/")) {
       try {
         return await handleApi(request, env, url);

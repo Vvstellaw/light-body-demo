@@ -18,12 +18,18 @@ test("ships an installable iPhone-safe app shell", async () => {
   assert.match(html, /\.sensor\{display:none\}/);
   assert.match(html, /openInstallGuide/);
   assert.match(html, /添加到手机桌面/);
+  assert.match(html, /拍照或相册/);
+  assert.doesNotMatch(html, /capture=["']environment["']/);
+  assert.match(html, /function storageJson/);
 
   const appManifest = JSON.parse(manifest);
   assert.equal(appManifest.display, "standalone");
   assert.equal(appManifest.scope, "/");
   assert.equal(appManifest.start_url, "/fit-demo.html");
   assert.ok(appManifest.icons.some((icon) => icon.sizes === "512x512"));
+  assert.match(serviceWorker, /light-body-v3/);
+  assert.match(serviceWorker, /event\.request\.mode === ["']navigate["']/);
+  assert.match(serviceWorker, /if \(response\.ok\)/);
   assert.match(serviceWorker, /pathname\.startsWith\(["']\/api\/["']\)/);
 });
 
@@ -39,8 +45,11 @@ test("keeps real records and private media storage wired", async () => {
   assert.match(html, /function renderCompare/);
   assert.match(html, /辅助录入测试版/);
   assert.match(html, /当前测试版还不会自动读取照片特征/);
+  assert.match(html, /if\(!recordResponse\.ok\)throw new Error/);
 
   assert.match(worker, /\/api\/records/);
+  assert.match(worker, /url\.pathname === "\/"/);
+  assert.match(worker, /\/fit-demo\.html/);
   assert.match(worker, /env\.DB/);
   assert.match(worker, /env\.PHOTOS\.put/);
   assert.match(worker, /oai-authenticated-user-id/);
